@@ -90,10 +90,16 @@ Plog::Plog(const std::multimap<double, Arrhenius>& rates)
 
 void Plog::validate(const std::string& equation)
 {
-    double T[] = {200.0, 500.0, 1000.0, 2000.0, 5000.0, 10000.0};
+    std::vector<double> T = {500.0, 1000.0, 2000.0};
+    // pressure, 1atm to 100 atm
+    double low_pressure = log(1.0), high_pressure = log(100.0);
+
     for (auto iter = pressures_.begin(); iter->first < 1000; iter++) {
+        if (iter->first < low_pressure || iter->first > high_pressure) {
+            continue;
+        }
         update_C(&iter->first);
-        for (size_t i=0; i < 6; i++) {
+        for (size_t i=0; i < T.size(); i++) {
             double k = updateRC(log(T[i]), 1.0/T[i]);
             if (!(k >= 0)) {
                 // k is NaN. Increment the iterator so that the error

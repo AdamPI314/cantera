@@ -6,6 +6,7 @@
 // This file is part of Cantera. See License.txt in the top-level directory or
 // at http://www.cantera.org/license.txt for license and copyright information.
 
+#include <limits>
 #include "cantera/base/stringUtils.h"
 #include "cantera/base/ctexceptions.h"
 #include "cantera/kinetics/Falloff.h"
@@ -30,8 +31,14 @@ void Troe::init(const vector_fp& c)
             c.size());
     }
     m_a = c[0];
-    m_rt3 = 1.0/c[1];
-    m_rt1 = 1.0/c[2];
+    if (c[1] != 0)
+        m_rt3 = 1.0/c[1];
+    else
+        m_rt3 = std::numeric_limits<double>::max();
+    if (c[2] != 0)
+        m_rt1 = 1.0/c[2];
+    else
+        m_rt1 = -std::numeric_limits<double>::max();
     if (c.size() == 4) {
         m_t2 = c[3];
     }

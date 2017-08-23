@@ -28,7 +28,7 @@ void NasaPoly2::validate(const std::string& name)
 
     // enthalpy
     delta = h_low - h_high;
-    if (fabs(delta/cp_low) > 0.001) {
+    if (fabs(delta/(fabs(cp_low)+1.0E-4)) > 0.001) {
         writelog("\n\n**** WARNING ****\nFor species {}, discontinuity"
                  " in h/RT detected at Tmid = {}\n", name, m_midT);
         writelog("\tValue computed using low-temperature polynomial:  {}\n", h_low);
