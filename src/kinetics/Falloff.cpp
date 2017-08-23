@@ -31,8 +31,8 @@ void Troe::init(const vector_fp& c)
             c.size());
     }
     m_a = c[0];
-    m_rt3 = (c[1] != 0) ? 1.0/c[1] : 0.0;
-    m_rt1 = (c[2] != 0) ? 1.0/c[2] : 0.0;
+    m_rt3 = (c[1] != 0) ? 1.0/c[1] : MaxExp;
+    m_rt1 = (c[2] != 0) ? 1.0/c[2] : MaxExp;
     if (c.size() == 4) {
         m_t2 = c[3];
     }
@@ -41,10 +41,10 @@ void Troe::init(const vector_fp& c)
 void Troe::updateTemp(double T, double* work) const
 {
     double Fcent = 0.0;
-    Fcent += ((m_rt3 != 0) ? (1.0 - m_a) * exp(-T*m_rt3) : 0.0);
-    Fcent += ((m_rt1 != 0) ? m_a * exp(-T*m_rt1) : 0.0);
+    Fcent += ((T*m_rt3 < MaxExp) ? (1.0 - m_a) * exp(-T*m_rt3) : 0.0);
+    Fcent += ((T*m_rt1 < MaxExp) ? m_a * exp(-T*m_rt1) : 0.0);
     if (m_t2) {
-        Fcent += exp(- m_t2 / T);
+        Fcent += ((m_t2 / T < MaxExp) ? exp(- m_t2 / T) : 0.0);
     }
 
     *work = log10(std::max(Fcent, SmallNumber));
