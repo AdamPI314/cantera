@@ -17,7 +17,6 @@ interfaces/matlab/Contents.m
 stage/
 .sconsign.dblite
 .sconf_temp
-cantera.conf*
 config.log
 *.lib
 *.exp
