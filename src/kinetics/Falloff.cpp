@@ -31,14 +31,8 @@ void Troe::init(const vector_fp& c)
             c.size());
     }
     m_a = c[0];
-    if (c[1] != 0)
-        m_rt3 = 1.0/c[1];
-    else
-        m_rt3 = std::numeric_limits<double>::max();
-    if (c[2] != 0)
-        m_rt1 = 1.0/c[2];
-    else
-        m_rt1 = -std::numeric_limits<double>::max();
+    m_rt3 = (c[1] != 0) ? 1.0/c[1] : 0.0;
+    m_rt1 = (c[2] != 0) ? 1.0/c[2] : 0.0;
     if (c.size() == 4) {
         m_t2 = c[3];
     }
@@ -46,10 +40,13 @@ void Troe::init(const vector_fp& c)
 
 void Troe::updateTemp(double T, double* work) const
 {
-    double Fcent = (1.0 - m_a) * exp(-T*m_rt3) + m_a * exp(-T*m_rt1);
+    double Fcent = 0.0;
+    Fcent += ((m_rt3 != 0) ? (1.0 - m_a) * exp(-T*m_rt3) : 0.0);
+    Fcent += ((m_rt1 != 0) ? m_a * exp(-T*m_rt1) : 0.0);
     if (m_t2) {
         Fcent += exp(- m_t2 / T);
     }
+
     *work = log10(std::max(Fcent, SmallNumber));
 }
 
