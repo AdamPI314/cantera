@@ -1100,6 +1100,19 @@ public:
      */
     virtual void setState_RPX(doublereal rho, doublereal p, const std::string& x);
 
+    //! Set the density (kg/m**3), Temperature (K) and mass fractions
+    /*!
+     * Note, the mass fractions are set first before the density and temperature 
+     * are set. Setting the temperature may involve the solution of a nonlinear
+     * equation.
+     *
+     * @param rho  Density (kg/m^3)
+     * @param t    Temperature (K)
+     * @param y    Vector of mole fractions.
+     *              Length is equal to m_kk.
+     */
+    virtual void setState_RTY(doublereal rho, doublereal t, const doublereal* y);
+
     //! Set the density (kg/m**3), pressure (Pa) and mass fractions
     /*!
      * Note, the mass fractions are set first before the density and pressure
