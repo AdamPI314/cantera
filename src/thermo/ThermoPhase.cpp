@@ -152,12 +152,6 @@ void ThermoPhase::setState_RPX(doublereal rho, doublereal p, const std::string& 
     setState_RP(rho,p);
 }
 
-void ThermoPhase::setState_RTY(doublereal rho, doublereal t, const doublereal* y)
-{
-    setMassFractions(y);
-    setState_TR(t,rho);
-}
-
 void ThermoPhase::setState_RPY(doublereal rho, doublereal p, const doublereal* y)
 {
     setMassFractions(y);

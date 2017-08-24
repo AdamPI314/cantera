@@ -1111,19 +1111,6 @@ public:
      * @param y    Vector of mole fractions.
      *              Length is equal to m_kk.
      */
-    virtual void setState_RTY(doublereal rho, doublereal t, const doublereal* y);
-
-    //! Set the density (kg/m**3), pressure (Pa) and mass fractions
-    /*!
-     * Note, the mass fractions are set first before the density and pressure
-     * are set. Setting the pressure may involve the solution of a nonlinear
-     * equation.
-     *
-     * @param rho  Density (kg/m^3)
-     * @param p    Pressure (Pa)
-     * @param y    Vector of mole fractions.
-     *              Length is equal to m_kk.
-     */
     virtual void setState_RPY(doublereal rho, doublereal p, const doublereal* y);
 
     //! Set the density (kg/m**3), pressure (Pa) and mass fractions
