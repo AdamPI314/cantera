@@ -58,10 +58,13 @@ const doublereal Pi = 3.14159265358979323846;
 //@{
 
 //! Avogadro's Number [number/kmol]
-const doublereal Avogadro = 6.02214129e26;
+//const doublereal Avogadro = 6.02214129e26;
+const doublereal Avogadro = 6.022140857e26;
 
 /// Universal Gas Constant. [J/kmol/K]
-const doublereal GasConstant = 8314.4621;
+//const doublereal GasConstant = 8314.4621;
+//const doublereal GasConstant = 8314.4598;
+const doublereal GasConstant = 8314;
 
 const doublereal logGasConstant = std::log(GasConstant);
 
@@ -76,7 +79,8 @@ const doublereal GasConst_cal_mol_K = GasConstant / 4184.0;
 const doublereal Boltzmann = GasConstant / Avogadro;
 
 /// Planck's constant. [J-s]
-const doublereal Planck = 6.62607009e-34; // J-s
+//const doublereal Planck = 6.62607009e-34; // J-s
+const doublereal Planck = 6.626070040e-34; // J-s
 const doublereal Planck_bar = Planck / (2 * Pi); // m2-kg/s
 
 /// log(k/h)

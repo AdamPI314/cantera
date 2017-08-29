@@ -31,8 +31,8 @@ void Troe::init(const vector_fp& c)
             c.size());
     }
     m_a = c[0];
-    m_rt3 = (c[1] != 0) ? 1.0/c[1] : MaxExp;
-    m_rt1 = (c[2] != 0) ? 1.0/c[2] : MaxExp;
+    m_rt3 = (c[1] != 0) ? 1.0/c[1] : BigNumber;
+    m_rt1 = (c[2] != 0) ? 1.0/c[2] : BigNumber;
     if (c.size() == 4) {
         m_t2 = c[3];
     }
